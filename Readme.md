@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Tatiana Mozoleva](https://up.htmlacademy.ru/javascript/24/user/505199).
-* Наставник: `Неизвестно`.
+* Наставник: [Виктор Кан](https://htmlacademy.ru/profile/viktorkan).
 
 ---
 
