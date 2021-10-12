@@ -18,23 +18,11 @@ const getRandomFloat = function (min, max, accuracy) {
 
 getRandomFloat(20.5, 35.5, 6);
 
-
 const getShuffleArray = (array) => {
-  array.sort(() => Math.random() - 0.5);
-};
-
-const getAvatarUrl = (item, number) => {
-  number++;
-  if (number < 10) {
-    return `img/avatars/user0${number}.png`;
-  }
-  return `img/avatars/user${number}.png`;
+  array.sort( () => Math.random() - 0.5);
 };
 
 const ADVERTISEMENT_COUNT = 10;
-
-// author
-const AVATARS = Array.from({length: ADVERTISEMENT_COUNT}, getAvatarUrl);
 
 // offer
 const TITLES = [
@@ -42,7 +30,7 @@ const TITLES = [
   'Oтель Modart',
   'Студия "Варварская"',
   'Palace Living Gold',
-  'Дом у озера'
+  'Дом у озера',
 ];
 
 const DESCRIPTIONS = [
@@ -50,7 +38,7 @@ const DESCRIPTIONS = [
   'Oтель Modart расположен рядом с пляжем в Олимпийском парке',
   'Апартаменты-студио «Варварская» расположены в самом центре Нижнего Новгорода',
   'Дворец с уникальным дизайном',
-  'Загородный комплекс «Лесные пруды» подарит возможность насладиться природой и свежим воздухом'
+  'Загородный комплекс «Лесные пруды» подарит возможность насладиться природой и свежим воздухом',
 ];
 
 const ACCOMODATIONS = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -62,25 +50,29 @@ const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'condit
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 const createAdvertisement = (item,index) => {
 
-  const locationLat = getRandomFloat (35.65000, 35.70000, 5);
-  const locationLng = getRandomFloat (139.70000, 139.80000, 5);
+  const locationLat = getRandomFloat(35.65000, 35.70000, 5);
+  const locationLng = getRandomFloat(139.70000, 139.80000, 5);
 
-  getShuffleArray(AVATARS);
   getShuffleArray(FEATURES);
   getShuffleArray(PHOTOS);
 
+  let avatarIndex = String(index + 1);
+  if (avatarIndex.length < 2) {
+    avatarIndex = `0${avatarIndex}`;
+  }
+
   return {
     author: {
-      avatar: AVATARS[index],
+      avatar: `img/avatars/user${avatarIndex}.png`,
     },
     offer: {
       title: TITLES[getRandomInt(0, TITLES.length-1)],
-      adress: String($ {locationLat }, $ { locationLng}),
+      adress: `${locationLat}, ${locationLng}`,
       price: getRandomInt(0, 3000),
       type: ACCOMODATIONS[getRandomInt(0, ACCOMODATIONS.length-1)],
       rooms: getRandomInt(0, 10),
@@ -98,5 +90,5 @@ const createAdvertisement = (item,index) => {
   };
 };
 
-const Advertisements = Array.from({length: ADVERTISEMENT_COUNT}, createAdvertisement);
+const advertisements = Array.from({length: ADVERTISEMENT_COUNT}, createAdvertisement);
 
