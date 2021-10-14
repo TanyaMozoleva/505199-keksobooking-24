@@ -1,5 +1,5 @@
 import{getRandomInt, getRandomFloat, getShuffleArray} from './utils.js';
-import {TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS} from './data.js';
+import{TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS} from './data.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
