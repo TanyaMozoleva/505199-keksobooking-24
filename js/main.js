@@ -1,57 +1,7 @@
-const getRandomInt = function (min, max) {
-  if (min >= 0 && min < max) {
-    const rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
-  }
-  throw new Error('Переданный диапазон чисел введен некорректно');
-};
-
-getRandomInt(20, 30);
-
-const getRandomFloat = function (min, max, accuracy) {
-  if (min >= 0 && min < max) {
-    const floatNumber = Math.random() * (max - min) + min;
-    return Number(floatNumber.toFixed(accuracy));
-  }
-  throw new Error('Переданный диапазон чисел введен некорректно');
-};
-
-getRandomFloat(20.5, 35.5, 6);
-
-const getShuffleArray = (array) => {
-  array.sort( () => Math.random() - 0.5);
-};
+import{getRandomInt, getRandomFloat, getShuffleArray} from './utils.js';
+import{TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS} from './data.js';
 
 const ADVERTISEMENT_COUNT = 10;
-
-// offer
-const TITLES = [
-  'Гостевой дом',
-  'Oтель Modart',
-  'Студия "Варварская"',
-  'Palace Living Gold',
-  'Дом у озера',
-];
-
-const DESCRIPTIONS = [
-  'Гостевой дом с садом и принадлежностями для барбекю',
-  'Oтель Modart расположен рядом с пляжем в Олимпийском парке',
-  'Апартаменты-студио «Варварская» расположены в самом центре Нижнего Новгорода',
-  'Дворец с уникальным дизайном',
-  'Загородный комплекс «Лесные пруды» подарит возможность насладиться природой и свежим воздухом',
-];
-
-const ACCOMODATIONS = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-
-const TIMES = ['12:00', '13:00', '14:00'];
-
-const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-
-const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
-];
 
 const createAdvertisement = (item,index) => {
 
