@@ -15,7 +15,7 @@ const getRandomFloat = function (min, max, accuracy) {
 };
 
 const getShuffleArray = (array) => {
-  array.sort( () => Math.random() - 0.5);
+  array.sort(() => Math.random() - 0.5);
 };
 
-export{getRandomInt, getRandomFloat, getShuffleArray};
+export { getRandomInt, getRandomFloat, getShuffleArray };

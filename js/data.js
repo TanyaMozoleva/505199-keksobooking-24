@@ -18,7 +18,14 @@ const ACCOMODATIONS = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const TIMES = ['12:00', '13:00', '14:00'];
 
-const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
 
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -26,4 +33,4 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-export{TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS};
+export { TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS };

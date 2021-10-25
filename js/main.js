@@ -1,12 +1,22 @@
-import{getRandomInt, getRandomFloat, getShuffleArray} from './utils.js';
-import{TITLES, DESCRIPTIONS, ACCOMODATIONS, TIMES, FEATURES, PHOTOS} from './data.js';
+import { getRandomInt, getRandomFloat, getShuffleArray } from './utils.js';
+import {
+  TITLES,
+  DESCRIPTIONS,
+  ACCOMODATIONS,
+  TIMES,
+  FEATURES,
+  PHOTOS,
+} from './data.js';
+
+import { renderCards } from './card.js';
+
+import { unactivateForm, activateForm } from './form.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
-const createAdvertisement = (item,index) => {
-
-  const locationLat = getRandomFloat(35.65000, 35.70000, 5);
-  const locationLng = getRandomFloat(139.70000, 139.80000, 5);
+const createAdvertisement = (item, index) => {
+  const locationLat = getRandomFloat(35.65, 35.7, 5);
+  const locationLng = getRandomFloat(139.7, 139.8, 5);
 
   getShuffleArray(FEATURES);
   getShuffleArray(PHOTOS);
@@ -21,16 +31,16 @@ const createAdvertisement = (item,index) => {
       avatar: `img/avatars/user${avatarIndex}.png`,
     },
     offer: {
-      title: TITLES[getRandomInt(0, TITLES.length-1)],
-      adress: `${locationLat}, ${locationLng}`,
+      title: TITLES[getRandomInt(0, TITLES.length - 1)],
+      address: `${locationLat}, ${locationLng}`,
       price: getRandomInt(0, 3000),
-      type: ACCOMODATIONS[getRandomInt(0, ACCOMODATIONS.length-1)],
+      type: ACCOMODATIONS[getRandomInt(0, ACCOMODATIONS.length - 1)],
       rooms: getRandomInt(0, 10),
       guests: getRandomInt(0, 100),
-      checkin: TIMES[getRandomInt(0, TIMES.length-1)],
-      checkout: TIMES[getRandomInt(0, TIMES.length-1)],
+      checkin: TIMES[getRandomInt(0, TIMES.length - 1)],
+      checkout: TIMES[getRandomInt(0, TIMES.length - 1)],
       features: FEATURES.slice(0, getRandomInt(0, FEATURES.length)),
-      description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length-1)],
+      description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length - 1)],
       photos: PHOTOS.slice(0, getRandomInt(0, PHOTOS.length)),
     },
     location: {
@@ -40,5 +50,11 @@ const createAdvertisement = (item,index) => {
   };
 };
 
-const advertisements = Array.from({length: ADVERTISEMENT_COUNT}, createAdvertisement);
+const advertisements = Array.from(
+  { length: ADVERTISEMENT_COUNT },
+  createAdvertisement
+);
 
+renderCards(advertisements);
+
+unactivateForm();
