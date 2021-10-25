@@ -67,23 +67,18 @@ const renderCards = (advertisements) => {
 
     cardPopup.querySelector('.popup__avatar').src = advertisement.author.avatar;
 
-    const hidden = (className) => {
-      if (cardPopup.querySelector(className).textContent === '') {
-        cardPopup.querySelector(className).style.display = 'none';
+    const hide = (className) => {
+      const element = cardPopup.querySelector(className);
+      if (element.innerHTML === '' || element.src === '') {
+        element.style.display = 'none';
       }
     };
 
-    const hiddenPhoto = (className) => {
-      if (cardPopup.querySelector(className).src === '') {
-        cardPopup.querySelector(className).style.display = 'none';
-      }
-    };
-
-    hiddenPhoto('.popup__avatar');
-    hidden('.popup__text');
-    hidden('.popup__features');
-    hidden('.popup__description');
-    hidden('.popup__photo');
+    hide('.popup__avatar');
+    hide('.popup__text');
+    hide('.popup__features');
+    hide('.popup__description');
+    hide('.popup__photos');
 
     const mapCanvas = document.querySelector('#map-canvas');
     mapCanvas.appendChild(cardPopup);
