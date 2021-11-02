@@ -15,3 +15,4 @@ const advertisements = Array.from(
 renderCards(advertisements);
 
 unactivateForm();
+activateForm();
