@@ -5,8 +5,6 @@ const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE_VALUE = 1000000;
 
-// priceInput.style = 'border: 5px solid red'; стили для ошибки
-
 const MIN_PRICES_OF_TYPES = {
   bungalow: 0,
   flat: 1000,
@@ -15,11 +13,20 @@ const MIN_PRICES_OF_TYPES = {
   palace: 10000,
 };
 
+const ROOMINESS = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
+};
+
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
 const typeInput = document.querySelector('#type');
+
 const roomNumberInput = document.querySelector('#room_number');
 const capacityGuestsInput = document.querySelector('#capacity');
+const capacityGuestsOption = capacityGuestsInput.querySelectorAll('option');
 
 const timeInSelect = document.querySelector('#timein');
 const timeOutSelect = document.querySelector('#timeout');
@@ -41,94 +48,89 @@ const setFormStatus = (isActive) => {
 const unactivateForm = () => setFormStatus(false);
 const activateForm = () => setFormStatus(true);
 
+const onErrorStyle = (element) => {
+  if (element === true) {
+    element.style = '';
+  }
+  element.style = 'border: 5px solid red';
+};
+
 // Валидация заголовка объявления //
 
-const onTitleInput = () => {
-  titleInput.addEventListener('input', () => {
-    const valueLength = titleInput.value.length;
-    if (valueLength === 0) {
-      titleInput.setCustomValidity(
-        `Минимальное количество символов ${MIN_TITLE_LENGTH} симв.`
-      );
-    } else if (valueLength < MIN_TITLE_LENGTH) {
-      titleInput.setCustomValidity(
-        `Ещё ${MIN_TITLE_LENGTH - valueLength} симв.`
-      );
-      titleInput.style = 'border: 5px solid red';
-    } else if (valueLength > MAX_TITLE_LENGTH) {
-      titleInput.setCustomValidity(
-        `Удалите лишние ${valueLength - MAX_TITLE_LENGTH} симв.`
-      );
-      titleInput.style = 'border: 5px solid red';
-    } else if (valueLength === MIN_TITLE_LENGTH) {
-      titleInput.style = '';
-    } else {
-      titleInput.setCustomValidity('');
-    }
-    titleInput.reportValidity();
-  });
-};
-onTitleInput();
+titleInput.addEventListener('input', () => {
+  const valueLength = titleInput.value.length;
+  if (valueLength === 0) {
+    titleInput.setCustomValidity(
+      `Минимальное количество символов ${MIN_TITLE_LENGTH} симв.`
+    );
+  } else if (valueLength < MIN_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Ещё ${MIN_TITLE_LENGTH - valueLength} симв.`);
+    onErrorStyle(titleInput);
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    titleInput.setCustomValidity(
+      `Удалите лишние ${valueLength - MAX_TITLE_LENGTH} симв.`
+    );
+    onErrorStyle(titleInput);
+  } else if (valueLength === MIN_TITLE_LENGTH) {
+    titleInput.style = '';
+  } else {
+    titleInput.setCustomValidity('');
+  }
+  titleInput.reportValidity();
+});
 
-//Валидация цены //
+//Валидация цены  //
 
-const onPriceInput = () => {
-  priceInput.addEventListener('input', () => {
-    const valuePrice = priceInput.value;
-    if (valuePrice > MAX_PRICE_VALUE) {
-      priceInput.setCustomValidity(
-        `Указанная стоимость больше максимально допустимого значения: ${MAX_PRICE_VALUE}`
-      );
-    } else {
-      priceInput.setCustomValidity('');
-    }
-    priceInput.reportValidity();
-  });
-};
+typeInput.addEventListener('change', () => {
+  const typeOfHouse = typeInput.value;
+  priceInput.setAttribute('min', MIN_PRICES_OF_TYPES[typeOfHouse]);
+  priceInput.setAttribute('max', MAX_PRICE_VALUE);
+  priceInput.placeholder = MIN_PRICES_OF_TYPES[typeOfHouse];
+});
 
-onPriceInput();
+//Валидация количества комнат и гостей  //
 
-const onValidatePrice = () => {
-  priceInput.addEventListener('input', () => {
-    if (priceInput.validity.valueMissing) {
-      return priceInput.setCustomValidity('Пожалуйста, введите цену');
-    } else if (priceInput.value < MIN_PRICES_OF_TYPES[typeInput.value]) {
-      return priceInput.setCustomValidity(
-        `Минимальная цена для выбранного типа жилья должна быть не меньше ${
-          MIN_PRICES_OF_TYPES[typeInput.value]
-        } руб. за ночь`
-      );
-    }
-    return priceInput.setCustomValidity('');
-  });
-  priceInput.reportValidity();
-};
+capacityGuestsInput.addEventListener('change', () => {
+  const roomAmount = Number(roomNumberInput.value);
+  const guestsAmount = Number(capacityGuestsInput.value);
 
-onValidatePrice(priceInput);
-
-//Валидация количества комнат и гостей//
-const onRoomSelect = () => {
-  capacityGuestsInput.addEventListener('change', () => {
-    const roomAmount = Number(roomNumberInput.value);
-    const guestsAmount = Number(capacityGuestsInput.value);
-
-    if (roomAmount < guestsAmount) {
-      capacityGuestsInput.setCustomValidity(
-        'Количество комнат не может быть меньше количества гостей'
-      );
-    } else if (roomAmount === 100 && guestsAmount !== 0) {
-      capacityGuestsInput.setCustomValidity('Доступно только: «не для гостей»');
-    } else if (roomAmount !== 100 && guestsAmount === 0) {
-      capacityGuestsInput.setCustomValidity(
-        'Пожалуйста, введите количество гостей'
-      );
-    } else {
-      capacityGuestsInput.setCustomValidity('');
-    }
-    capacityGuestsInput.reportValidity();
-  });
-};
-onRoomSelect(roomNumberInput);
+  if (roomAmount < guestsAmount) {
+    capacityGuestsInput.setCustomValidity(
+      'Количество комнат не может быть меньше количества гостей'
+    );
+  } else if (
+    roomAmount == Object.keys(ROOMINESS)[0] &&
+    guestsAmount != Object.values(ROOMINESS)[0]
+  ) {
+    capacityGuestsInput.setCustomValidity(
+      'Пожалуйста, введите количество гостей, не больше 1'
+    );
+  } else if (
+    roomAmount == Object.keys(ROOMINESS)[1] &&
+    guestsAmount != Object.values(ROOMINESS)[1]
+  ) {
+    capacityGuestsInput.setCustomValidity(
+      'Пожалуйста, введите количество гостей.Доступно 1 или 2'
+    );
+  } else if (
+    roomAmount == Object.keys(ROOMINESS)[2] &&
+    guestsAmount != Object.values(ROOMINESS)[2]
+  ) {
+    capacityGuestsInput.setCustomValidity(
+      'Пожалуйста, введите количество гостей.Доступно 1, 2, 3'
+    );
+  } else if (
+    roomAmount == Object.keys(ROOMINESS)[3] &&
+    guestsAmount != Object.values(ROOMINESS)[3]
+  ) {
+    capacityGuestsInput.setCustomValidity(
+      'Пожалуйста, введите количество гостей. Доступно только: «не для гостей»'
+    );
+  } else {
+    capacityGuestsInput.setCustomValidity('');
+  }
+  capacityGuestsInput.reportValidity();
+});
 
 //Синхронизация времени заезда и выезда //
 
@@ -138,19 +140,6 @@ timeInSelect.addEventListener('change', () => {
 
 timeOutSelect.addEventListener('change', () => {
   timeInSelect.value = timeOutSelect.value;
-});
-
-submitButton.addEventListener('click', () => {
-  onPriceInput();
-  onRoomSelect();
-});
-
-resetButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  advertisementForm.reset();
-  // addressInput.value = `${locationLat}, ${locationLng}`;
-  addressInput.value = advertisement.offer.address;
-  mapFiltersForm.reset();
 });
 
 export { unactivateForm, activateForm };
