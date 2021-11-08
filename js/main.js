@@ -5,6 +5,8 @@ import { renderCards } from './card.js';
 
 import { unactivateForm, activateForm } from './form.js';
 
+import { createMarker, returnDefaultMapView } from './map.js';
+
 const ADVERTISEMENT_COUNT = 10;
 
 const advertisements = Array.from(
