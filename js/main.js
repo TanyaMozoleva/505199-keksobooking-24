@@ -1,12 +1,9 @@
 // import { getRandomInt, getRandomFloat, getShuffleArray } from './utils.js';
 import { createAdvertisement } from './data.js';
 
-import { renderCards } from './card.js';
-
 import { unactivateForm, activateForm } from './form.js';
 
-// import { createMarker, returnDefaultMapView } from './map.js';
-import './map.js';
+import { createMarkers } from './map.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
@@ -15,7 +12,7 @@ const advertisements = Array.from(
   createAdvertisement
 );
 
-renderCards(advertisements);
+createMarkers(advertisements);
 
 unactivateForm();
 activateForm();

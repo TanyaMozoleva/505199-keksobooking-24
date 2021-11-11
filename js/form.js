@@ -143,4 +143,8 @@ timeOutSelect.addEventListener('change', () => {
   timeInSelect.value = timeOutSelect.value;
 });
 
+//координаты
+
+addressInput.setAttribute('readonly', 'readonly');
+
 export { unactivateForm, activateForm, form };

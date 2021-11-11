@@ -2,7 +2,7 @@ import { getRandomInt, getRandomFloat, getShuffleArray } from './utils.js';
 const TITLES = [
   'Гостевой дом',
   'Oтель Modart',
-  'Студия "Варварская"',
+  'Студия "Варварская',
   'Palace Living Gold',
   'Дом у озера',
 ];
