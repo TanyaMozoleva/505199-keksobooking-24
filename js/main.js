@@ -5,7 +5,8 @@ import { renderCards } from './card.js';
 
 import { unactivateForm, activateForm } from './form.js';
 
-import { createMarker, returnDefaultMapView } from './map.js';
+// import { createMarker, returnDefaultMapView } from './map.js';
+import './map.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
