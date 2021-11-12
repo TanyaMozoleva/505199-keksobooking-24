@@ -93,4 +93,4 @@ const renderCards = (advertisements) => {
   });
 };
 
-export { renderCards };
+export { getAdvertisementCard };

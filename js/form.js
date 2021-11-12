@@ -33,8 +33,9 @@ const timeOutSelect = document.querySelector('#timeout');
 
 const addressInput = document.querySelector('#address');
 
+const form = document.querySelector('.ad-form');
 const submitButton = document.querySelector('.ad-form__submit');
-const resetButton = document.querySelector('.ad-form__reset');
+const resetButton = form.querySelector('.ad-form__reset');
 
 const setFormStatus = (isActive) => {
   advertisementForm.classList.toggle('ad-form--disabled', !isActive);
@@ -142,4 +143,8 @@ timeOutSelect.addEventListener('change', () => {
   timeInSelect.value = timeOutSelect.value;
 });
 
-export { unactivateForm, activateForm };
+//координаты
+
+addressInput.setAttribute('readonly', 'readonly');
+
+export { unactivateForm, activateForm, form };
