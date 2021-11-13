@@ -1,3 +1,5 @@
+const SHOW_TIME = 5000;
+
 const getRandomInt = function (min, max) {
   if (min >= 0 && min < max) {
     const rand = min + Math.random() * (max + 1 - min);
@@ -18,4 +20,12 @@ const getShuffleArray = (array) => {
   array.sort(() => Math.random() - 0.5);
 };
 
-export { getRandomInt, getRandomFloat, getShuffleArray };
+const isEscapeEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export {
+  getRandomInt,
+  getRandomFloat,
+  getShuffleArray,
+  isEscapeEvent,
+  SHOW_TIME,
+};

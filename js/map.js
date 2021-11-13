@@ -92,4 +92,4 @@ const createMarkers = (advertisements) => {
 //   markerGroup.clearLayers();
 // };
 
-export { createMarkers, mainPinMarker };
+export { createMarkers, mainPinMarker, returnDefaultMapView };
