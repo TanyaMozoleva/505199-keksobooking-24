@@ -1,13 +1,13 @@
 // import { getRandomInt, getRandomFloat, getShuffleArray } from './utils.js';
 // import { createAdvertisement } from './data.js';
 
-import { unactivateForm, activateForm, setFormSubmit } from './form.js';
+// import {  setFormSubmit } from './form.js';
 
 import { createMarkers } from './map.js';
 
 import { getData } from './api.js';
 
-import { createDownloadMessage } from './popup.js';
+// import { createDownloadMessage } from './popup.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
@@ -18,8 +18,8 @@ const ADVERTISEMENT_COUNT = 10;
 
 // createMarkers(advertisements);
 
-unactivateForm();
-activateForm();
+// unactivateForm();
+// activateForm();
 
 getData((advertisements) => {
   createMarkers(advertisements.slice(0, ADVERTISEMENT_COUNT));
