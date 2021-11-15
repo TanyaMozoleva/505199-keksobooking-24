@@ -18,27 +18,35 @@ const hide = (className, cardPopup) => {
 const renderFeatures = (offerFeatures, advertisement) => {
   const featuresList = offerFeatures.querySelectorAll('.popup__feature');
 
-  featuresList.forEach((futuresListItem) => {
-    const isNecessary = advertisement.offer.features.some((feature) =>
-      futuresListItem.classList.contains(`popup__feature--${feature}`)
-    );
-    if (!isNecessary) {
-      futuresListItem.remove();
-    }
-  });
+  if (advertisement.offer.features) {
+    featuresList.forEach((futuresListItem) => {
+      const isNecessary = advertisement.offer.features.some((feature) =>
+        futuresListItem.classList.contains(`popup__feature--${feature}`)
+      );
+      if (!isNecessary) {
+        futuresListItem.remove();
+      }
+    });
+  } else {
+    offerFeatures.classList.add('visually-hidden');
+  }
 };
 
 const renderPhotos = (offerPhotos, advertisement, cardPopup) => {
   const photoListFragment = document.createDocumentFragment();
-  advertisement.offer.photos.forEach((photoItem) => {
-    const photoElement = cardPopup
-      .querySelector('.popup__photo')
-      .cloneNode(true);
-    photoElement.src = photoItem;
-    photoListFragment.appendChild(photoElement);
-  });
-  offerPhotos.innerHTML = '';
-  offerPhotos.appendChild(photoListFragment);
+  if (advertisement.offer.photos) {
+    advertisement.offer.photos.forEach((photoItem) => {
+      const photoElement = cardPopup
+        .querySelector('.popup__photo')
+        .cloneNode(true);
+      photoElement.src = photoItem;
+      photoListFragment.appendChild(photoElement);
+    });
+    offerPhotos.innerHTML = '';
+    offerPhotos.appendChild(photoListFragment);
+  } else {
+    offerPhotos.classList.add('visually-hidden');
+  }
 };
 
 const getAdvertisementCard = (advertisement) => {
@@ -73,7 +81,7 @@ const getAdvertisementCard = (advertisement) => {
 
   cardPopup.querySelector('.popup__avatar').src = advertisement.author.avatar;
 
-  hide('.popup__avatar', cardPopup);
+  // hide('.popup__avatar', cardPopup);
   hide('.popup__text', cardPopup);
   hide('.popup__features', cardPopup);
   hide('.popup__description', cardPopup);
