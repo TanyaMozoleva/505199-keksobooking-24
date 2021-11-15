@@ -61,6 +61,7 @@ const getData = (onSuccess, onError) => {
       if (response.ok) {
         return response.json();
       }
+      onError();
       createDownloadMessage();
     })
     .then((advertisements) => onSuccess(advertisements))
