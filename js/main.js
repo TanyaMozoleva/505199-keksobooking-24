@@ -1,18 +1,24 @@
-// import { getRandomInt, getRandomFloat, getShuffleArray } from './utils.js';
-import { createAdvertisement } from './data.js';
-
-import { unactivateForm, activateForm } from './form.js';
-
 import { createMarkers } from './map.js';
+
+import { getData } from './api.js';
+
+import { createDownloadMessage } from './popup.js';
 
 const ADVERTISEMENT_COUNT = 10;
 
-const advertisements = Array.from(
-  { length: ADVERTISEMENT_COUNT },
-  createAdvertisement
-);
+// const advertisements = Array.from(
+//   { length: ADVERTISEMENT_COUNT },
+//   createAdvertisement
+// );
 
-createMarkers(advertisements);
+// createMarkers(advertisements);
 
-unactivateForm();
-activateForm();
+// unactivateForm();
+// activateForm();
+
+const onSuccessData = (advertisements) =>
+  createMarkers(advertisements.slice(0, ADVERTISEMENT_COUNT));
+
+const onErrorData = () => createDownloadMessage();
+
+getData(onSuccessData, onErrorData);

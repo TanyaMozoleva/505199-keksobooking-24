@@ -1,3 +1,7 @@
+import { sendData, API_ADDRESS } from './api.js';
+import { returnDefaultMapView } from './map.js';
+import { createPopupMessage, success, error } from './popup.js';
+
 const advertisementForm = document.querySelector('.ad-form');
 const mapFiltersForm = document.querySelector('.map__filters');
 
@@ -147,4 +151,27 @@ timeOutSelect.addEventListener('change', () => {
 
 addressInput.setAttribute('readonly', 'readonly');
 
-export { unactivateForm, activateForm, form };
+// отправить форму
+
+const setFormSubmit = () => {
+  advertisementForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      API_ADDRESS,
+      () => {
+        createPopupMessage(success), returnDefaultMapView();
+      },
+      () => createPopupMessage(error),
+      new FormData(evt.target)
+    );
+  });
+};
+
+setFormSubmit();
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  returnDefaultMapView();
+});
+
+export { unactivateForm, activateForm, setFormSubmit, form, mapFiltersForm };
