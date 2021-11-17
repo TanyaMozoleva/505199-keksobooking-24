@@ -22,10 +22,19 @@ const getShuffleArray = (array) => {
 
 const isEscapeEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   getRandomInt,
   getRandomFloat,
   getShuffleArray,
   isEscapeEvent,
   SHOW_TIME,
+  debounce,
 };

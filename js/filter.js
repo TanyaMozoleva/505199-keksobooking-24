@@ -1,5 +1,9 @@
 import { mapFiltersForm } from './form.js';
 
+import { deleteMarkers, createMarkers } from './map.js';
+
+import { debounce } from './utils.js';
+
 const ANY_SELECT = 'any';
 const MIN_PRICE = 10000;
 const MAX_PRICE = 50000;
@@ -96,4 +100,45 @@ const getFilterAds = (advertisements) => {
   return filteredAds;
 };
 
-export { getFilterAds };
+// const onFilterChange = (advertisements) => {
+//   getFilterAds(advertisements);
+//   deleteMarkers();
+//   createMarkers(filteredAds.slice(0, DEFAULT_AMOUNT));
+// };
+
+// const setFilterListener = (advertisements) => {
+//   mapFiltersForm.addEventListener(
+//     'change',
+//     debounce(() => onFilterChange(advertisements))
+//   );
+//   mapFiltersForm.addEventListener(
+//     'reset',
+//     debounce(() => onFilterChange(advertisements))
+//   );
+// };
+
+const clearFilter = () => {
+  mapFiltersForm.reset();
+};
+
+const onFilterChange = () => {
+  mapFiltersForm.addEventListener(
+    'change',
+    debounce(() => {
+      getFilterAds();
+      deleteMarkers();
+      createMarkers(filteredAds.slice(0, DEFAULT_AMOUNT));
+    })
+  );
+};
+onFilterChange();
+
+// const onFilterChange =  debounce((advertisements) => {
+//   const newAdvertisements = getFilterAds(advertisements);
+//   deleteMarkers();
+//   createMarkers(newAdvertisements.slice(0, DEFAULT_AMOUNT));
+// });
+
+// onFilterChange();
+
+export { getFilterAds, clearFilter, onFilterChange };

@@ -4,6 +4,8 @@ import { getData } from './api.js';
 
 import { createDownloadMessage } from './popup.js';
 
+// import { onFilterChange } from './filter.js';
+
 const ADVERTISEMENT_COUNT = 10;
 
 // const advertisements = Array.from(

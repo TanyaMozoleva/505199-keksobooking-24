@@ -88,8 +88,8 @@ const createMarkers = (advertisements) => {
   });
 };
 
-// const deleteMarkers = () => {
-//   markerGroup.clearLayers();
-// };
+const deleteMarkers = () => {
+  markerGroup.clearLayers();
+};
 
-export { createMarkers, mainPinMarker, returnDefaultMapView };
+export { createMarkers, mainPinMarker, returnDefaultMapView, deleteMarkers };

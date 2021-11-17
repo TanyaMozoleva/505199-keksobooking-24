@@ -174,4 +174,15 @@ resetButton.addEventListener('click', (evt) => {
   returnDefaultMapView();
 });
 
-export { unactivateForm, activateForm, setFormSubmit, form, mapFiltersForm };
+const resetAdvertisementForm = () => {
+  advertisementForm.reset();
+};
+
+export {
+  unactivateForm,
+  activateForm,
+  setFormSubmit,
+  form,
+  mapFiltersForm,
+  resetAdvertisementForm,
+};
